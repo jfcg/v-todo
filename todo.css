@@ -1,9 +1,5 @@
 html, body, h1, h2, ol, ul, li, div, span {margin:0; border:0; padding:0; font-family:Verdana, sans-serif}
 ol, ul {padding-left:30px}
 .todolist button, .todolist input {visibility:hidden; margin:0; border:1px solid; padding:1px}
-.todolist li:hover > button, .todolist span:hover > input, .todolist button:hover ~ span > span > input {visibility:visible}
-.todolist span {z-index:-1}
-.todolist button {z-index:2; position:absolute}
-.todolist button:first-child {margin-left:-18px}
-.todolist button:first-child + button + button {margin-left:18px}
+.todolist span:hover > button, .todolist span:hover > input {visibility:visible}
 .todolist input {width:99px}

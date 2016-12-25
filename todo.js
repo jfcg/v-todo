@@ -37,23 +37,27 @@ Vue.component('todolist', {
 	created() {
 		Vue.set(this.tdobj, 'todo', '')
 	},
+	components: {
+		'tditem': { // single todo item
+			props: ['tdobj'],
+			template:
+			`<span>{{tdobj}}
+				<slot name="moveup"/><slot name="delete"/><slot name="mklist"/>
+			</span>`
+		},
+	},
 	template:
-	`<span class="todolist">
-	<span>{{tdobj.name}} : <input title="change list name with name:NewName"
-		placeholder="Add a todo" v-model.trim="tdobj.todo" @keyup.enter="addNew(tdobj)"></span>
-	<ol><li v-for="(td, ix) in tdobj.list">
-		<button title="delete"  @click="remove(ix,td)">x</button>
-		<button title="move up" @click="swap(ix,tdobj.list)" v-if="ix>0">^</button>
-
-		<template v-if="td.constructor === String">
-			<button title="make a list"  @click="update(ix, {name:td, list:[]})">L</button>
-			<span>{{td}}</span>
-		</template>
-		<template v-else>
-			<button title="make an item" @click="item(ix,td)">I</button>
-			<todolist :tdobj="td"/>
-		</template>
-	</li></ol></span>`,
+	`<div class="todolist"><span>{{tdobj.name}} :
+		<slot name="moveup"/><slot name="delete"/><slot name="mkitem"/>
+		<input title="Change list name with name:NewName" placeholder="Add a todo" v-model.trim="tdobj.todo" @keyup.enter="addNew(tdobj)">
+	</span><ol><li v-for="(td, ix) in tdobj.list">
+		<component :tdobj="td" :is="td.constructor === String ? 'tditem' : 'todolist'">
+			<button slot="delete" title="delete"  @click="remove(ix,td)">x</button>
+			<button slot="moveup" title="move up" @click="swap(ix,tdobj.list)" v-show="ix>0">^</button>
+			<button slot="mkitem" title="make an item" @click="item(ix,td)">I</button>
+			<button slot="mklist" title="make a list"  @click="update(ix, {name:td, list:[]})">L</button>
+		</component>
+	</li></ol></div>`,
 	methods: {
 		addNew(o) { // add new todo item
 			td = o.todo
