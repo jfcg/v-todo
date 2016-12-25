@@ -54,9 +54,6 @@ Vue.component('todolist', {
 			<todolist :tdobj="td"/>
 		</template>
 	</li></ol></span>`,
-	data() {
-		return {}
-	},
 	methods: {
 		addNew(o) { // add new todo item
 			td = o.todo
