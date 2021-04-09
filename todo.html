@@ -7,7 +7,7 @@
 <style>
 	#Ex1 {max-width:25%}
 </style>
-<script src="../../vue-2.1/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
 <script src="todo.js"></script>
 </head>
 <body>
@@ -17,21 +17,19 @@
 <script>
 var ex1 = new Vue({
 	el: '#Ex1',
-	data: {
-		todos: {
-			name: 'Weekly Todos', // todo list name
-			list: [
-				'Learn JS', // ordinary todo item
-				{ name: 'Learn Vue!', // sub-list
-					list: [
-					'Reactiveness',
-					'Components',
-					'Events',
-				] },
-				'Build sth',
-			],
-		},
-	},
+	data: { todos: {
+		name: 'Weekly Todos', // todo list name
+		list: [
+			'Learn JS', // todo item
+			{ name: 'Learn Vue!', // sub-list
+			  list: [
+				'Reactiveness',
+				'Components',
+				'Events',
+			] },
+			'Build something',
+		],
+	} }
 })
 </script>
 </body>
